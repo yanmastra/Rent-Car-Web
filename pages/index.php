@@ -4,9 +4,10 @@
 
 <?php 
 define("KEY", "12345");
+//untuk menambahkan menu tab
 $menu = array(
 	"Transaction" => "../pages/#home",
-	"Cars Data" => "../pages/?page=cars-data",
+	"Cars Data" => "../pages/?page=cars-data", //cars-data ini harus sama dengan nama file 
 	"Employes" => "../pages/?page=employes",
 	"Employes 2" => "../pages/?page=employes"
 );
@@ -14,7 +15,7 @@ $menu = array(
 $link = array(
 	"../vendor/datatables/css/dataTables.bootstrap.min.css" => "style"
 );
-
+include 'connection.php';
 include 'componen.php';
 headerProperty(null, "yanmastra", $link);
 ?>

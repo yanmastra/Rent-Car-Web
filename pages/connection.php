@@ -6,7 +6,7 @@ function connection(){
 	$user = "root";
 	$pass = "";
 	$dbName = "db_rent_car";
-	return mysqli_connect($host, $user, $pass, $dbName) or die("Connection failure! :(");
+	return mysqli_connect($host, $user, $pass, $dbName);
 }
 
 function query($sql){
@@ -22,6 +22,8 @@ function query($sql){
 }
 
 function selectFrom($tbName, $columns = null, $where = null, $short = null, $limit = null){
+	$con = connection();
+
 	$sql = "SELECT ";
 	if (is_array($columns)) {
 		$sql .= $columns[0];
@@ -29,8 +31,10 @@ function selectFrom($tbName, $columns = null, $where = null, $short = null, $lim
 			$sql .= ", ".$columns[$i];
 		}
 	}else{
-		$sql .= "* ";
+		$sql .= " * ";
 	}
+
+	$sql .= " FROM ".$tbName;
 	
 	if ($where !== null) $sql .= " WHERE ".$where;
 	else $sql .= " WHERE 1 ";
@@ -43,7 +47,7 @@ function selectFrom($tbName, $columns = null, $where = null, $short = null, $lim
 		$sql .= $limit;
 	}
 
-	return mysqli_query($sql);
+	return mysqli_query($con, $sql);
 }
 
 function insertInto($tbName, $values = array()){
@@ -65,7 +69,7 @@ function insertInto($tbName, $values = array()){
 	else return 0;
 }
 
-function update($tbName, $values = array, $where){
+function update($tbName, $values = array(), $where){
 	$sql = "UPDATE ".$tbName." SET ";
 	$set = array(); $i = 0;	$xWhere = "";
 	foreach ($values as $key => $value) {
