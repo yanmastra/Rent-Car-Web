@@ -8,6 +8,7 @@ define("KEY", "12345");
 $menu = array(
 	"Transaction" => "../pages/#home",
 	"Cars Data" => "../pages/?page=cars-data", //cars-data ini harus sama dengan nama file 
+	"Employes" => "../pages/?page=employes", 
 	"Cars Colors" => "../pages/?page=cars-colors",
 	"Cars Brand" => "../pages/?page=cars-brand-data"
 );
@@ -88,6 +89,9 @@ headerProperty(null, "yanmastra", $link);
 															<span class="input-group-addon">IDR</span>
 															<input type="number" id="cash-back" name="cash-back" disabled class="form-control">
 														</div>
+													</div>
+													<div class="form-group">
+														<button class="btn btn-success form-control" type="submit">Submit</button>
 													</div>
 												</div>
 											</div>
