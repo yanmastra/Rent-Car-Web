@@ -88,3 +88,54 @@ function headerProperty($description = null, $author = null, $link = null){
     </style>
 ";
 }
+
+function setLink($file){
+	if ($file === "#home") {
+		return "../pages/#home";
+	}
+	return "../pages/?page=".$file;
+}
+
+function appendLink($query, $value){
+	return "&".$query."=".$value;
+}
+
+function showResult($result, $message, $backLink){
+	$panel = "";
+	if (is_bool($result)) {
+		if ($result) {
+			$panel = "panel-info";
+		}else{
+			$panel = "panel-danger";
+		}
+	}
+
+	echo "
+		<br>
+		<div class=\"panel $panel\">
+			<div class=\"panel-heading\"><b>Result</b></div>
+			<div class=\"panel-body text-center\">
+				<p class=\"text-center\">
+					$message
+				</p>
+				<p>
+					<a href=\"$backLink\" class=\"btn btn-info\">Back</a>
+				</p>
+			</div>
+		</div>
+		<script>
+			setInterval(function(){
+				window.location = '".$backLink."';
+				}, 3000);
+		</script>
+		";
+}
+
+function getHeaderTable($tb_name){
+	$res = mysqli_query(connection(), "DESC ".$tb_name);
+	$show = "";
+	while ($row = mysqli_fetch_array($res)) {
+		$show .= "<th>".$row['Field']."</th>";
+	}
+	return $show;
+}

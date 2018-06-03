@@ -5,7 +5,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading"><b>Cars Colors </b></div>
 			<div class="panel-body">
-				<form action="cars-colors-process.php" method="post" class="row">
+				<form action="<?=setLink("cars-colors-process").appendLink("oldPage", $_GET['page']) ?>" method="post" class="row">
 					<div class="col-md-5">
 						<div class="form-group">
 							<label for="name">Name Colors</label>
@@ -34,10 +34,6 @@
 				
 			<div class="row">
 				<div class="col-md-12">
-					<?php 
-						$colCars = selectFrom("tb_color");
-
-					?>
 					<table class="table data-table">
 									<thead>
 										<tr>
@@ -48,7 +44,8 @@
 									</thead>
 									<tbody>
 										<?php
-										while ($row = mysqli_fetch_object($colCars)){
+										$colCars = selectFrom("tb_color"); //memilih data dari tabel database, dengan nilai kembalian berupa mysqli result 
+										while ($row = mysqli_fetch_object($colCars)){ //fetch_object : mengubah setiap row dari result menjadi sebuah object
 											echo "
 										<tr>
 											<td>".$row->_ID."</td>

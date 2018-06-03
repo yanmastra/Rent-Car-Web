@@ -8,6 +8,7 @@ define("KEY", "12345");
 $menu = array(
 	"Transaction" => "../pages/#home",
 	"Cars Data" => "../pages/?page=cars-data", //cars-data ini harus sama dengan nama file 
+	"Customers" => "../pages/?page=costumer", 
 	"Employes" => "../pages/?page=employes", 
 	"Cars Colors" => "../pages/?page=cars-colors",
 	"Cars Brand" => "../pages/?page=cars-brand-data"
@@ -43,16 +44,16 @@ headerProperty(null, "yanmastra", $link);
 								<div class="panel panel-info">
 									<div class="panel-heading"><b>Transaction form</b></div>
 									<div class="panel-body">
-										<form action="" method="post" class="col-md-12">
+										<form action="<?=setLink('transaction-process').appendLink('oldPage','#home')?>" method="post" class="col-md-12">
 											<div class="row">
 												<div class="col-md-4">
 													<div class="form-group">
 														<label for="customer">Customer</label>
-														<input type="text" name="customer" id="customer" class="form-control" placeholder="Select customer from lists on right side" onclick="alert('Select customer from lists on right side!')">
+														<input type="text" name="customer" id="customer" class="form-control" placeholder="Select customer from lists on right side" onclick="alert('Select customer from lists on right side!')" required>
 													</div>
 													<div class="form-group">
 														<label for="car">Car</label>
-														<input type="text" name="car" id="car" class="form-control" placeholder="Select car from lists on right side" onclick="alert('Select car from lists on right side');">
+														<input type="text" name="car" id="car" class="form-control" placeholder="Select car from lists on right side" onclick="alert('Select car from lists on right side');" required>
 														<p><div class="input-group">
 															<input type="number" id="cost" class="form-control" disabled>
 															<span class="input-group-addon"><b>/ Day</b></span>
@@ -107,7 +108,7 @@ headerProperty(null, "yanmastra", $link);
 										<div style="
 										position: relative;
 										top: 0;
-										max-height: 420px;
+										max-height: 300px;
 										overflow-y: auto;
 										width: 100%;
 										height: 100%;
@@ -132,7 +133,7 @@ headerProperty(null, "yanmastra", $link);
 										<div style="
 										position: relative;
 										top: 0;
-										max-height: 420px;
+										max-height: 300px;
 										overflow-y: auto;
 										width: 100%;
 										height: 100%;
@@ -155,37 +156,18 @@ headerProperty(null, "yanmastra", $link);
 								<table class="table data-table">
 									<thead>
 										<tr>
-											<th>No.</th>
-											<th>Name Sample</th>
-											<th>Value Sample 1</th>
-											<th>Value sample 2</th>
+											<?= getHeaderTable("vw_transaction") ?>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
+										<?php
+										$res = selectFrom("vw_transaction");
+										while ($row = mysqli_fetch_assoc($res)) {
+											echo "<tr>";
+											print_cells($row);
+											echo "</tr>";
+										 } 
+										?>
 									</tbody>
 								</table>
 							</div>

@@ -55,18 +55,12 @@ function insertInto($tbName, $values = array()){
 	$col = array(); $val = array();
 	$i = 0;
 	foreach ($values as $key => $value) {
-		$col[$i] = $key; $val[$i] = mysqli_escape_string($values);
+		$col[$i] = $key; $val[$i] = is_integer($value)?$value:"'".$value."'";
 		$i++;
 	}
-	$sql .= "(".implode(",", $col).") VALUES (".implode(",", $val).")";
-	try {
-		$res = mysqli_master_query(connection(), $sql);
-	} catch (Exception $e) {
-		$res = null;
-	}
-
-	if(is_int($res)) return $res;
-	else return 0;
+	$sql .= "(".implode(", ", $col).") VALUES (".implode(", ", $val).")";
+	$res = mysqli_query(connection(), $sql);
+	return $res;
 }
 
 function update($tbName, $values = array(), $where){
