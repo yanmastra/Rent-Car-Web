@@ -5,10 +5,10 @@
 		<div class="panel panel-info">
 			<div class="panel-heading"><b>Transaction form</b></div>
 			<div class="panel-body">
-				<form action="cars-data-process.php" method="post" class="row">
+				<form action="<?=setLink("cars-brand-process").appendLink("oldPage", $_GET['page']) ?>"method="post" class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="brand">Brand Name</label>
+							<label for="brandname">Brand Name</label>
 							<input type="text" name="brandname" id="brandname" class="form-control" placeholder="">
 						</div>
 					</div>
@@ -30,40 +30,32 @@
 				
 			<div class="row">
 				<div class="col-md-12">
+					<?php 
+						$Cars = selectFrom("tb_cars_brand");
+
+					?>
 					<table class="table data-table">
 									<thead>
 										<tr>
-											<th>No.</th>
-											<th>Name Sample</th>
-											<th>Value Sample 1</th>
-											<th>Value sample 2</th>
+											<th>ID</th>
+											<th>Brand Name</th>
+											<th>Cost</th>
 										</tr>
 									</thead>
 									<tbody>
+										<?php
+										while ($row = mysqli_fetch_object($Cars)){
+											echo "
 										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
+											<td>".$row->_ID."</td>
+											<td>".$row->BrandName."</td>
+											<td>".$row->Cost."</td>
+											<td><button type=\"button\" class=\"btn btn-warning\">EDIT</button></td>
+											<td><button type=\"button\" class=\"btn btn-danger\">DELETE</button></td>
+										</tr>";
+										} 
+										?>
+										
 									</tbody>
 								</table>
 				</div>

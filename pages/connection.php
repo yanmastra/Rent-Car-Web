@@ -74,7 +74,7 @@ function update($tbName, $values = array(), $where){
 	else $xWhere = $where;
 
 	$sql .= implode(", ", $set)." WHERE ".$xWhere;
-	return mysqli_query($sql);
+	return mysqli_query(connection(), $sql);
 }
 
 function deleteFrom($tbName, $where){
@@ -88,7 +88,7 @@ function deleteFrom($tbName, $where){
 		}
 	}else{
 		$sql .= $where;
-		if(mysqli_query(connection(), $xSql)) $res += 1;
+		if(mysqli_query(connection(), $sql)) $res += 1;
 	}
 	return $res;
 }

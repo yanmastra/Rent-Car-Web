@@ -5,7 +5,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading"><b>Transaction form</b> <em id="mode"></em></div>
 			<div class="panel-body">
-				<form action="<?=setLink('customers-process').appendLink('oldPage', $_GET['page']).appendLink('action','insert') ?>" method="post" class="row" id="form-data" >
+				<form action="<?=setLink('costumer-process').appendLink('oldPage', $_GET['page']).appendLink('action','insert') ?>" method="post" class="row" id="form-data" >
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="id">ID CARD</label>
@@ -58,6 +58,9 @@
 											<th>Gender</th>
 											<th>Address</th>
 											<th>Contact</th>
+											<th></th>
+											<th></th>
+
 										</tr>
 									</thead>
 									<tbody>
@@ -70,6 +73,8 @@
 											<td>".$row->Address."</td>
 											<td>".$row->Gender."</td>
 											<td>".$row->ContactInfo."</td>
+											<td><button type=\"button\" class=\"btn btn-warning form-control\">EDIT</button></td>
+											<td><button type=\"button\" class=\"btn btn-danger form-control\">DELETE</button></td>
 										</tr>";
 										} 
 										?>

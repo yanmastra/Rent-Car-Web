@@ -17,7 +17,16 @@ if ($valid) {
 		"Name" => $_POST['name'],
 		"MaintCost" => $_POST['maincost']
 	);
-	$valid = insertInto("tb_color", $values);
+	
+	if (isset($_GET['mode']) && $_GET['mode'] == 'edit') {
+		if(isset($_GET['id']))
+			$valid = update("tb_color", $values, "_ID = '".$_GET['id']."'");
+		else $valid = false;
+	}else{
+		$valid = insertInto("tb_color", $values);
+	}
+	//tambahan if else
+
 	if ($valid){ 
 		$msg = "Color has been recorded :)";
 		unset($_POST);
@@ -25,7 +34,16 @@ if ($valid) {
 		$msg = "Failed to save color";
 	}
 }else{
-	$msg = "Please fill in all";
+	if (isset($_GET['mode']) && $_GET['mode'] == 'delete' && isset($_GET['id'])){
+		$valid = deleteFrom("tb_color", "_ID = '".$_GET['id']."'");
+		if ($valid) {
+			$msg = "1 item has been deleted";
+		}else{
+			$msg = "Failed to delete this item";
+		}
+		//tambahan if else
+	}else
+		$msg = "Please fill in all";
 }
 $backLink = "../pages/#home";
 

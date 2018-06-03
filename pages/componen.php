@@ -2,6 +2,7 @@
 defined("KEY") or exit("No dirrect script access!");
 
 function tab_menu($menu = array(), $active, $tab = null){
+	defined("KEY") or exit();
 	echo "<ul class=\"nav nav-pills\">";
 	foreach ($menu as $key => $value) {
 		$xtab = "";

@@ -5,7 +5,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading"><b>Transaction form</b></div>
 			<div class="panel-body">
-				<form action="cars-data-process.php" method="post" class="row">
+				<form action="<?=setLink("cars-data-process").appendLink("oldPage", $_GET['page']) ?>" method="post" class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="plat">Plat Number</label>
@@ -36,7 +36,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="color">Total Cost</label>
+							<label for="color">Colors</label>
 							<select name="color" id="color" class="form-control">
 								<option value="Black">Black</option>
 								<option value="White">White</option>
@@ -57,45 +57,30 @@
 				
 			<div class="row">
 				<div class="col-md-12">
+						<?php 
+						$Cars = selectFrom("vw_cars");
+
+					?>
 					<table class="table data-table">
 									<thead>
 										<tr>
-											<th>ID</th>
-											<th>Car</th>
-											<th>Date Lease</th>
-											<th>Rent Range</th>
-											<th>Renter</th>
-											<th>Total Cost</th>
-											<th>Total Payed</th>
-											<th>Date Return</th>
-											<th>Excess</th>
+											<?=getHeaderTable("vw_cars") ?>
+											<th></th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
+										<?php
+										while ($row = mysqli_fetch_object($Cars)){
+											echo "<tr>";
+											print_cells($row);
+											echo "
+									
+											<td><button type=\"button\" class=\"btn btn-warning\">EDIT</button></td>
+											<td><button type=\"button\" class=\"btn btn-danger\">DELETE</button></td>
+										</tr>";
+										} 
+										?>
 									</tbody>
 								</table>
 				</div>

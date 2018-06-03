@@ -7,32 +7,35 @@
 								<div class="panel panel-info">
 									<div class="panel-heading"><b>Employes form</b></div>
 									<div class="panel-body">
-										<form action="" method="post" class="row">
+										<form action="<?=setLink('employeeproses').appendLink('oldPage', $_GET['page']).appendLink('action','insert') ?>" method="post" class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="customer">Username</label>
+												<label for="user">Username</label>
 												<input type="text" name="user" id="user" class="form-control" required>
 											</div>
 											<div class="form-group">
-												<label for="car">Password</label>
+												<label for="pass">Password</label>
 												<input type="password" name="pass" id="pass" class="form-control required" >
 											
 											</div>
 											<div class="form-group">
-												<label for="car">Nama</label>
+												<label for="nama">Nama</label>
 												<input type="text" name="nama" id="nama" class="form-control required" >
 											
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="car">Address</label>
+												<label for="address">Address</label>
 												<input type="text" name="address" id="address" class="form-control required" >
 											
 											</div>
 											<div class="form-group">
-												<label for="car">Phonenumber</label>
-												<input type="tex" name="pass" id="pass" class="form-control required" >
+												<label for="phone">Phonenumber</label>
+												<input type="text" name="phone" id="phone" class="form-control required" >
+											</div>
+											<div class="form-group">
+												<button type="submit" class="btn btn-success form-control">SUBMIT</button>
 											</div>
 										</div>
 										</form>
@@ -46,41 +49,25 @@
 									<thead>
 										<tr>
 											<th>Username</th>
-											<th>Password</th>
 											<th>Nama</th>
 											<th>Address</th>
 											<th>Phonenumber</th>
 										</tr>
 									</thead>
 									<tbody>
+									
+										<?php
+										$data = selectFrom("tb_employes");
+										while ($row = mysqli_fetch_object($data)){
+											echo "
 										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
+											<td>".$row->Username."</td>
+											<td>".$row->Name."</td>
+											<td>".$row->Address."</td>
+											<td>".$row->PhoneNumber."</td>
+										</tr>";
+										} 
+										?>
 									</tbody>
 								</table>
 							</div>
