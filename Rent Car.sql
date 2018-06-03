@@ -13,10 +13,12 @@
 
 
 -- Dumping database structure for db_rent_car
+DROP DATABASE IF EXISTS `db_rent_car`;
 CREATE DATABASE IF NOT EXISTS `db_rent_car` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `db_rent_car`;
 
 -- Dumping structure for table db_rent_car.tb_cars
+DROP TABLE IF EXISTS `tb_cars`;
 CREATE TABLE IF NOT EXISTS `tb_cars` (
   `PlatNumber` varchar(12) NOT NULL,
   `Year` smallint(6) NOT NULL,
@@ -46,6 +48,7 @@ INSERT INTO `tb_cars` (`PlatNumber`, `Year`, `Brand`, `Color`, `Status`, `Condit
 /*!40000 ALTER TABLE `tb_cars` ENABLE KEYS */;
 
 -- Dumping structure for table db_rent_car.tb_cars_brand
+DROP TABLE IF EXISTS `tb_cars_brand`;
 CREATE TABLE IF NOT EXISTS `tb_cars_brand` (
   `_ID` int(11) NOT NULL AUTO_INCREMENT,
   `BrandName` varchar(100) NOT NULL,
@@ -66,6 +69,7 @@ INSERT INTO `tb_cars_brand` (`_ID`, `BrandName`, `Cost`) VALUES
 /*!40000 ALTER TABLE `tb_cars_brand` ENABLE KEYS */;
 
 -- Dumping structure for table db_rent_car.tb_color
+DROP TABLE IF EXISTS `tb_color`;
 CREATE TABLE IF NOT EXISTS `tb_color` (
   `_ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(20) NOT NULL,
@@ -73,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `tb_color` (
   PRIMARY KEY (`_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Dumping data for table db_rent_car.tb_color: ~5 rows (approximately)
+-- Dumping data for table db_rent_car.tb_color: ~6 rows (approximately)
 DELETE FROM `tb_color`;
 /*!40000 ALTER TABLE `tb_color` DISABLE KEYS */;
 INSERT INTO `tb_color` (`_ID`, `Name`, `MaintCost`) VALUES
@@ -86,6 +90,7 @@ INSERT INTO `tb_color` (`_ID`, `Name`, `MaintCost`) VALUES
 /*!40000 ALTER TABLE `tb_color` ENABLE KEYS */;
 
 -- Dumping structure for table db_rent_car.tb_customers
+DROP TABLE IF EXISTS `tb_customers`;
 CREATE TABLE IF NOT EXISTS `tb_customers` (
   `IDCardNumber` varchar(30) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -95,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `tb_customers` (
   PRIMARY KEY (`IDCardNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table db_rent_car.tb_customers: ~4 rows (approximately)
+-- Dumping data for table db_rent_car.tb_customers: ~5 rows (approximately)
 DELETE FROM `tb_customers`;
 /*!40000 ALTER TABLE `tb_customers` DISABLE KEYS */;
 INSERT INTO `tb_customers` (`IDCardNumber`, `Name`, `Address`, `Gender`, `ContactInfo`) VALUES
@@ -107,6 +112,7 @@ INSERT INTO `tb_customers` (`IDCardNumber`, `Name`, `Address`, `Gender`, `Contac
 /*!40000 ALTER TABLE `tb_customers` ENABLE KEYS */;
 
 -- Dumping structure for table db_rent_car.tb_employes
+DROP TABLE IF EXISTS `tb_employes`;
 CREATE TABLE IF NOT EXISTS `tb_employes` (
   `Username` varchar(50) NOT NULL,
   `Password` varchar(40) NOT NULL,
@@ -118,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `tb_employes` (
   PRIMARY KEY (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table db_rent_car.tb_employes: ~1 rows (approximately)
+-- Dumping data for table db_rent_car.tb_employes: ~2 rows (approximately)
 DELETE FROM `tb_employes`;
 /*!40000 ALTER TABLE `tb_employes` DISABLE KEYS */;
 INSERT INTO `tb_employes` (`Username`, `Password`, `Name`, `Address`, `PhoneNumber`, `DeletedAt`, `RegBy`) VALUES
@@ -127,6 +133,7 @@ INSERT INTO `tb_employes` (`Username`, `Password`, `Name`, `Address`, `PhoneNumb
 /*!40000 ALTER TABLE `tb_employes` ENABLE KEYS */;
 
 -- Dumping structure for table db_rent_car.tb_expenses
+DROP TABLE IF EXISTS `tb_expenses`;
 CREATE TABLE IF NOT EXISTS `tb_expenses` (
   `_ID` int(11) NOT NULL AUTO_INCREMENT,
   `ExpensesType` int(11) NOT NULL,
@@ -142,6 +149,7 @@ DELETE FROM `tb_expenses`;
 /*!40000 ALTER TABLE `tb_expenses` ENABLE KEYS */;
 
 -- Dumping structure for table db_rent_car.tb_expenses_type
+DROP TABLE IF EXISTS `tb_expenses_type`;
 CREATE TABLE IF NOT EXISTS `tb_expenses_type` (
   `_ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) NOT NULL,
@@ -154,6 +162,7 @@ DELETE FROM `tb_expenses_type`;
 /*!40000 ALTER TABLE `tb_expenses_type` ENABLE KEYS */;
 
 -- Dumping structure for table db_rent_car.tb_rent_schedule
+DROP TABLE IF EXISTS `tb_rent_schedule`;
 CREATE TABLE IF NOT EXISTS `tb_rent_schedule` (
   `Date` date NOT NULL,
   `Car` varchar(12) NOT NULL,
@@ -166,6 +175,7 @@ DELETE FROM `tb_rent_schedule`;
 /*!40000 ALTER TABLE `tb_rent_schedule` ENABLE KEYS */;
 
 -- Dumping structure for table db_rent_car.tb_transaction
+DROP TABLE IF EXISTS `tb_transaction`;
 CREATE TABLE IF NOT EXISTS `tb_transaction` (
   `_ID` int(11) NOT NULL AUTO_INCREMENT,
   `CarNumber` varchar(12) NOT NULL,
@@ -181,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `tb_transaction` (
   CONSTRAINT `FK_tb_transaction_tb_customers` FOREIGN KEY (`Renter`) REFERENCES `tb_customers` (`IDCardNumber`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 
--- Dumping data for table db_rent_car.tb_transaction: ~22 rows (approximately)
+-- Dumping data for table db_rent_car.tb_transaction: ~25 rows (approximately)
 DELETE FROM `tb_transaction`;
 /*!40000 ALTER TABLE `tb_transaction` DISABLE KEYS */;
 INSERT INTO `tb_transaction` (`_ID`, `CarNumber`, `PayedCost`, `DateLease`, `RentRange`, `DateReturn`, `Renter`, `Excess`, `Fine`) VALUES
@@ -213,6 +223,7 @@ INSERT INTO `tb_transaction` (`_ID`, `CarNumber`, `PayedCost`, `DateLease`, `Ren
 /*!40000 ALTER TABLE `tb_transaction` ENABLE KEYS */;
 
 -- Dumping structure for view db_rent_car.vw_cars
+DROP VIEW IF EXISTS `vw_cars`;
 -- Creating temporary table to overcome VIEW dependency errors
 CREATE TABLE `vw_cars` (
 	`Plat Number` VARCHAR(12) NOT NULL COLLATE 'latin1_swedish_ci',
@@ -225,6 +236,7 @@ CREATE TABLE `vw_cars` (
 ) ENGINE=MyISAM;
 
 -- Dumping structure for view db_rent_car.vw_transaction
+DROP VIEW IF EXISTS `vw_transaction`;
 -- Creating temporary table to overcome VIEW dependency errors
 CREATE TABLE `vw_transaction` (
 	`ID` INT(11) NOT NULL,
@@ -242,6 +254,7 @@ CREATE TABLE `vw_transaction` (
 ) ENGINE=MyISAM;
 
 -- Dumping structure for view db_rent_car.vw_cars
+DROP VIEW IF EXISTS `vw_cars`;
 -- Removing temporary table and create final VIEW structure
 DROP TABLE IF EXISTS `vw_cars`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_cars` AS SELECT 
@@ -258,6 +271,7 @@ INNER JOIN tb_cars_brand ON tb_cars.Brand = tb_cars_brand._ID
 ORDER BY Year ;
 
 -- Dumping structure for view db_rent_car.vw_transaction
+DROP VIEW IF EXISTS `vw_transaction`;
 -- Removing temporary table and create final VIEW structure
 DROP TABLE IF EXISTS `vw_transaction`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_transaction` AS SELECT 
